@@ -1,0 +1,31 @@
+hash: a5fa2a4a50d921feb883ce748e6ae732a6fc98d5c70bd7ebc3f2fb3984a2e07c
+updated: 2018-06-30T19:16:23.408785939+09:00
+imports:
+- name: github.com/davecgh/go-spew
+  version: 8991bc29aa16c548c550c7ff78260e27b9ab7c73
+  subpackages:
+  - spew
+- name: github.com/dgrijalva/jwt-go
+  version: 06ea1031745cb8b3dab3f6a236daf2b0aa468b7e
+- name: github.com/lestrrat-go/jwx
+  version: a95bda93e9bfe67fec3b537c3d1541d267a332fc
+  subpackages:
+  - internal/base64
+  - jwa
+  - jwk
+- name: github.com/lestrrat-go/pdebug
+  version: 39f9a71bcabe9432cbdfe4d3d33f41988acd2ce6
+- name: github.com/pkg/errors
+  version: 816c9085562cd7ee03e7f8188a1cfd942858cded
+- name: github.com/sirupsen/logrus
+  version: e3292c4c4d7fc915224d48222565b02f6af1900e
+- name: golang.org/x/crypto
+  version: a49355c7e3f8fe157a85be2f77e6e269a0f89602
+  subpackages:
+  - ssh/terminal
+- name: golang.org/x/sys
+  version: 7138fd3d9dc8335c567ca206f4333fb75eb05d56
+  subpackages:
+  - unix
+  - windows
+testImports: []
