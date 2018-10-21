@@ -1,3 +1,0 @@
-package: github.com/ilovelili/dongfeng/sharedlib
-import:
-- package: github.com/sirupsen/logrus
