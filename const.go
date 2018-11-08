@@ -7,4 +7,6 @@ const (
 	MetaDataIP = "Df-X-Ip"
 	// MetaDataJwks field in request metadata
 	MetaDataJwks = "Df-X-Jwks"
+	// UserAgent user agent in request metadata
+	UserAgent = "DF-X-Ua"
 )
