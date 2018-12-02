@@ -296,3 +296,12 @@ func (now *Now) Between(begin, end string) bool {
 	endTime := now.MustParse(end)
 	return now.After(beginTime) && now.Before(endTime)
 }
+
+// Format format built-in time
+func Format(t time.Time, format ...string) string {
+	if len(format) == 0 {
+		return t.Format(time.RFC3339)
+	}
+
+	return t.Format(format[0])
+}
