@@ -297,8 +297,12 @@ func (now *Now) Between(begin, end string) bool {
 	return now.After(beginTime) && now.Before(endTime)
 }
 
-// Format format built-in time
-func (now *Now) Format(format ...string) string {
+// FormatTime format built-in time
+func (now *Now) FormatTime(format ...string) string {
+	if now.Location().String() == "UTC" {
+		now = NewTime(now.Add(-8 * time.Hour))
+	}
+
 	if len(format) == 0 {
 		return now.Format(time.RFC3339)
 	}
