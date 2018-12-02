@@ -298,10 +298,10 @@ func (now *Now) Between(begin, end string) bool {
 }
 
 // Format format built-in time
-func Format(t time.Time, format ...string) string {
+func (now *Now) Format(format ...string) string {
 	if len(format) == 0 {
-		return t.Format(time.RFC3339)
+		return now.Format(time.RFC3339)
 	}
 
-	return t.Format(format[0])
+	return now.Format(format[0])
 }
