@@ -21,7 +21,7 @@ func RandStringRunes(n int) string {
 }
 
 // ContainString slice contains specified string element or not
-func ContainString(s []interface{}, e string) bool {
+func ContainString(s []string, e string) bool {
 	for _, a := range s {
 		if a == e {
 			return true
