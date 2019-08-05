@@ -3,12 +3,59 @@ package sharedlib
 import (
 	"errors"
 	"fmt"
+	"sync"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/kelvinji2009/graphql"
 	"github.com/lestrrat-go/jwx/jwk"
+
+	authing "github.com/Authing/authing-go-sdk"
+	prettyjson "github.com/hokaccha/go-prettyjson"
 )
 
-var keyset *jwk.Set
+var (
+	keyset   *jwk.Set
+	once     sync.Once
+	instance *Client
+)
+
+// Client authing client wrapper
+type Client struct {
+	AuthingClient *authing.Client
+}
+
+// NewAuthClient  new authing client
+func NewAuthClient(clientID, appSecret string) *Client {
+	once.Do(func() {
+		client := authing.NewClient(clientID, appSecret, false)
+		// Enable debug info for graphql client, just comment it if you want to disable the debug info
+		client.Client.Log = func(s string) {
+			b := []byte(s)
+			pj, _ := prettyjson.Format(b)
+			fmt.Println(string(pj))
+		}
+
+		instance = &Client{
+			AuthingClient: client,
+		}
+	})
+
+	return instance
+}
+
+// VerifyLogin verifiy login status by idtoken
+func (c *Client) VerifyLogin(idtoken string) (bool, error) {
+	p := authing.CheckLoginStatusQueryParameter{
+		Token: graphql.String(idtoken),
+	}
+
+	q, err := c.AuthingClient.CheckLoginStatus(&p)
+	if err != nil {
+		return false, err
+	}
+
+	return bool(q.CheckLoginStatus.Status), nil
+}
 
 // ParseJWT parse JWT
 func ParseJWT(idtoken, jwks string) (claims jwt.MapClaims, token *jwt.Token, err error) {
